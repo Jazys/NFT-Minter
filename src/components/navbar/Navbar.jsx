@@ -1,27 +1,83 @@
 import React,{ useState} from 'react'
 import './navbar.css'
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
+import { FaGalacticRepublic } from 'react-icons/fa';
 import logo from '../../assets/logo.png'
 import {  Link } from "react-router-dom";
+import { ethers } from "ethers";
+
 
 const Menu = () => (
   <>
      <Link to="/"><p>Explore</p> </Link>
-     <p>My Items</p>
+     <Link to="/"><p>My NFTs</p></Link>
     
   </>
  )
 
  const Navbar = () => {
-  const [toggleMenu,setToggleMenu] = useState(false)
-   const [user,setUser] = useState(false)
 
-  const handleLogout = () => {
-    setUser(false);
-  }
-  const handleLogin = () => {
-    setUser(true);
-  }
+    // usetstate for storing and retrieving wallet details
+    const [data, setdata] = useState({
+      address: "",
+      addressMin:"",
+      Balance: null,
+    });
+    
+  const [toggleMenu,setToggleMenu] = useState(false)
+
+
+  // Button handler button for handling a
+  // request event for metamask
+  const bntConnectWallet = () => {   
+    // Asking if metamask is already present or not
+
+    
+    if (window.ethereum) {
+      // res[0] for fetching a first wallet
+      window.ethereum
+        .request({ method: "eth_requestAccounts" })
+        .then(async (res) =>{ 
+
+          let chainId = await window.ethereum.request({ method: 'eth_chainId'})
+          console.log('Connected to chain:' + chainId)
+
+          const rinkebyChainId = '0x4'
+
+          if (chainId !== rinkebyChainId) {
+            alert('You are not connected to the Rinkeby Testnet!')
+            return
+          }
+
+         accountChangeHandler(res[0])
+      });
+    } else {
+      alert("install metamask extension!!");
+    }
+  };
+  
+  // getbalance function for getting a balance in
+  // a right format with help of ethers
+  const getbalance = async (address) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const balance = await provider.getBalance(address);
+    const balanceInEth = ethers.utils.formatEther(balance);
+  
+  };
+  
+  // Function for getting handling all events
+  const accountChangeHandler = (account) => {
+    // Setting an address data
+
+    //console.log(account);
+    setdata({
+      address: account,
+      addressMin: account.substr(0,6)+"...."+account.substr(account.length-4)
+    });
+ 
+    // Setting a balance
+    getbalance(account);
+  };
 
   return (
     <div className='navbar'>
@@ -29,35 +85,29 @@ const Menu = () => (
         <div className="navbar-links_logo">
           <img src={logo} alt="logo" />
           <Link to="/"> 
-            <h1>CryptoKet</h1>
+            <h1>NFT Minter</h1>
           </Link>
         </div>
         <div className="navbar-links_container">
           <input type="text" placeholder='Search Item Here' autoFocus={true} />
-         <Menu />
-         {user && <Link to="/"><p onClick={handleLogout}>Logout</p></Link> }
-        
+         <Menu />               
         </div>
       </div>
       <div className="navbar-sign">
-      {user ? (
+     
+      {data.address !=="" ?
+      (     
+        <>  
+        <FaGalacticRepublic color="#0f0"/> 
+          <b style={{ color: 'white' }}> {data.addressMin}</b>  
+        </>  
+         
+      ):(
         <>
-         <Link to="/create"> 
-          <button type='button' className='primary-btn' >Create</button>
-        </Link>
-        <button type='button' className='secondary-btn'>Connect</button>
-        </>
-      ): (
-        <>
-        <Link to="/login"> 
-         <button type='button' className='primary-btn' onClick={handleLogin} >Sign In</button>
-        </Link>
-        <Link to="/register"> 
-          <button type='button' className='secondary-btn'>Sign Up</button>
-        </Link>
+        <button type='button' className='primary-btn' onClick={bntConnectWallet} >Connect Wallet</button>
         </>
       )}
-       
+  
 
        
       </div>
@@ -71,24 +121,18 @@ const Menu = () => (
              <Menu />
             </div>
             <div className="navbar-menu_container-links-sign">
-            {user ? (
-              <>
-              <Link to="/create"> 
-                <button type='button' className='primary-btn' >Create</button>
-              </Link>
-              <button type='button' className='secondary-btn'>Connect</button>
-              </>
-            ): (
-              <>
-              <Link to="/login"> 
-              <button type='button' className='primary-btn' onClick={handleLogin} >Sign In</button>
-              </Link>
-              <Link to="/register"> 
-                <button type='button' className='secondary-btn'>Sign Up</button>
-              </Link>
-              </>
-            )}
-           
+            {data.address !=="" ?
+              (     
+                <>  
+                <FaGalacticRepublic color="#0f0"/> 
+                  <b style={{ color: 'white' }}> {data.addressMin}</b>  
+                </>  
+                
+              ):(
+                <>
+                <button type='button' className='primary-btn' onClick={bntConnectWallet} >Connect Wallet</button>
+                </>
+              )}           
             </div>
             </div>
         )}

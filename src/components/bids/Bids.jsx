@@ -12,6 +12,25 @@ import bids8 from '../../assets/bids8.png'
 import { Link } from 'react-router-dom';
 
 const Bids = ({title}) => {
+
+  /*var indents = [];
+  for (var i = 0; i < 30; i++) {
+    indents.push( <div className="card-column" >
+    <div className="bids-card">
+      <div className="bids-card-top">
+        <img src={bids1} alt="" />
+      <Link to={`/toto/123`}>
+      <p className="bids-title">Abstact Smoke Red</p>
+      </Link>
+      </div>
+      <div className="bids-card-bottom">
+        <p>1.25 <span>ETH</span></p>
+        <p> <AiFillHeart /> 92</p>
+      </div>
+    </div>
+  </div>);
+  }*/
+
   return (
     <div className='bids section__padding'>
       <div className="bids-container">
@@ -23,7 +42,7 @@ const Bids = ({title}) => {
             <div className="bids-card">
               <div className="bids-card-top">
                 <img src={bids1} alt="" />
-              <Link to={`/post/123`}>
+              <Link to={`/toto/123`}>
               <p className="bids-title">Abstact Smoke Red</p>
               </Link>
               </div>

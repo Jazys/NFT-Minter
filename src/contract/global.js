@@ -1,0 +1,2 @@
+const contractAdress = "0x5D652B11B46b5e8D107Fb641a8142375FD0667b0"
+export default contractAdress

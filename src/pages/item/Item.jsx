@@ -3,8 +3,9 @@ import './item.css'
 import creator from '../../assets/seller2.png'
 import item from '../../assets/item1.png'
 
-const Item = () => {
+const Item = (props) => {
 
+  console.log(props);
 
 
   return( 
