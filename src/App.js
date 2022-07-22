@@ -1,11 +1,11 @@
 import './App.css';
 import {Navbar,Footer} from './components'
-import {Home,Profile,Item, Create,Login,Register} from './pages'
+import {Home,Profile,Item, Create,Login,Register, MyNft, Mint, Explore} from './pages'
 import { Routes, Route } from "react-router-dom";
 import React, { useState, useEffect  } from "react";
 import { ethers } from "ethers";
 import abiContract from './contract/abi.json';
-import contractAdress from './contract/global';
+import { contractAdress, enableMint} from './contract/global';
 import useBus from 'use-bus';
 import { dispatch } from 'use-bus';
 
@@ -151,8 +151,11 @@ function App() {
       let tokenMetadataURI = await contract.tokenURI(tokenId)
 
       if (tokenMetadataURI.startsWith("ipfs://")) {
-        tokenMetadataURI = `https://ipfs.io/ipfs/${tokenMetadataURI.split("ipfs://")[1]}`
+        tokenMetadataURI = `https://gateway.pinata.cloud/ipfs/${tokenMetadataURI.split("ipfs://")[1]}`
+        tokenMetadataURI = tokenMetadataURI.replace("json","png");
       }
+
+      //https://gateway.pinata.cloud/ipfs/Qmf8HbWaXaYKrkzaXAFf2oMMAHJuyuVvc7ZUtugESK1LK7/1.json
 
       console.log(tokenMetadataURI);
 
@@ -173,11 +176,21 @@ function App() {
       <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path=":item/:id" element={<Item  walletInfo={data}/>} />
+            <Route path="/nft/:id" element={<Item  walletInfo={data}/>} />
             <Route path="/create" element={<Create /> } />
-            <Route path="/profile/:id" element={<Profile />} />
+            {enableMint  ?
+              (     
+                <>  
+                    <Route path="/mint" element={ <Mint />} />
+                </>  
+                
+              ):(<> </> )}
+            <Route path="/mynft" element={ <MyNft />} />
+         
+            <Route path="/explore" element={ <Explore />} />
+            {/*<Route path="/profile/:id" element={<Profile />} />
             <Route path="/login" element={ <Login connect={btnhandler}/>} />
-            <Route path="/register" element={ <Register />} />
+            <Route path="/register" element={ <Register />} />*/}            
           </Routes>
       <Footer />
     </div>

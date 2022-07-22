@@ -12,3 +12,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
+//to share global variable
+//https://stackoverflow.com/questions/34351804/how-to-declare-a-global-variable-in-react
+

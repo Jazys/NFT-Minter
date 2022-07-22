@@ -1,0 +1,89 @@
+
+.title-main {
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  --primary-color: #2A2D3A;
+  --background-color: #2A2D3A;
+  --font: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  background: var(--primary-color);
+  margin: 20px auto;
+  padding: 20px;
+  font-weight: 600;
+  font-size: 38px;
+  line-height: 42px;
+  color: #EB1484;
+  width: 100%;
+}
+
+.main-card{
+  background: #2A2D3A;
+  border-radius: 20px;
+  padding: 11px 12px 19px 11px;
+  margin-inline: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+ 
+}
+
+.main-card-text{
+  color: #FFFFFF;
+  width: 100%;
+  font-size: 20px;
+}
+
+
+.column-left {
+  float: left;
+  width: 50%;
+  padding: 5px;
+  margin-left: 10px;
+  flex-basis: 30%
+}
+
+.column-right {
+  float: right;
+  width: 50%;
+  padding: 5px;
+  margin-left: 10px;
+  flex-basis: 80%
+}
+
+
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 500px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+img {
+  max-width: 100%
+}
+.image {
+  flex-basis: 20%
+}
+.text {
+  font-size: 20px;
+  padding-left: 20px;
+}

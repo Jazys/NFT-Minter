@@ -49,6 +49,7 @@ const Create = () => {
                <option>Collectibles</option>
                <option>Trading Cards</option>
                <option>Utility</option>
+               <option>Service</option>
             </select>
           </div>
           <div className="formGroup">

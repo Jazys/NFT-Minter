@@ -1,35 +1,32 @@
 import React from 'react'
 import './bids.css'
-import { AiFillHeart,AiOutlineHeart } from "react-icons/ai";
-import bids1 from '../../assets/bids1.png'
-import bids2 from '../../assets/bids2.png'
-import bids3 from '../../assets/bids3.png'
-import bids4 from '../../assets/bids4.png'
-import bids5 from '../../assets/bids5.png'
-import bids6 from '../../assets/bids6.png'
-import bids7 from '../../assets/bids7.png'
-import bids8 from '../../assets/bids8.png'
+import { AiFillHeart} from "react-icons/ai";
 import { Link } from 'react-router-dom';
+import { allNft } from '../../contract/global';
 
-const Bids = ({title}) => {
+const Bids = ({title, more}) => {
 
-  /*var indents = [];
-  for (var i = 0; i < 30; i++) {
-    indents.push( <div className="card-column" >
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  const nftToDisplay = [];
+  for (var i = 0; i < allNft.length; i++) {
+    nftToDisplay.push( <div className="card-column" >
     <div className="bids-card">
       <div className="bids-card-top">
-        <img src={bids1} alt="" />
-      <Link to={`/toto/123`}>
-      <p className="bids-title">Abstact Smoke Red</p>
+        <img src={allNft[i].img} alt="" />
+      <Link to={`/nft/`+allNft[i].id}>
+      <p className="bids-title">{allNft[i].title}</p>
       </Link>
       </div>
       <div className="bids-card-bottom">
-        <p>1.25 <span>ETH</span></p>
-        <p> <AiFillHeart /> 92</p>
+        <p>{allNft[i].price} <span>{allNft[i].token}</span></p>
+        <p> <AiFillHeart /> {getRandomInt(100)}</p>
       </div>
     </div>
   </div>);
-  }*/
+  }
 
   return (
     <div className='bids section__padding'>
@@ -38,123 +35,19 @@ const Bids = ({title}) => {
           <h1>{title}</h1>
         </div>
         <div className="bids-container-card">
-          <div className="card-column" >
-            <div className="bids-card">
-              <div className="bids-card-top">
-                <img src={bids1} alt="" />
-              <Link to={`/toto/123`}>
-              <p className="bids-title">Abstact Smoke Red</p>
-              </Link>
-              </div>
-              <div className="bids-card-bottom">
-                <p>1.25 <span>ETH</span></p>
-                <p> <AiFillHeart /> 92</p>
-              </div>
-            </div>
-          </div>
-          <div className="card-column" >
-            <div className="bids-card">
-              <div className="bids-card-top">
-                <img src={bids2} alt="" />
-              <Link to={`/post/123`}>
-              <p className="bids-title">Mountain Landscape</p>
-              </Link>
-              </div>
-              <div className="bids-card-bottom">
-                <p>0.20 <span>ETH</span></p>
-                <p> <AiFillHeart /> 25</p>
-              </div>
-            </div>
-          </div>
-          <div className="card-column" >
-            <div className="bids-card">
-              <div className="bids-card-top">
-                <img src={bids3} alt="" />
-              <Link to={`/post/123`}>
-              <p className="bids-title">Paint Color on Wall</p>
-              </Link>
-              </div>
-              <div className="bids-card-bottom">
-                <p>0.55 <span>ETH</span></p>
-                <p> <AiFillHeart /> 55</p>
-              </div>
-            </div>
-          </div>
-          <div className="card-column" >
-            <div className="bids-card">
-              <div className="bids-card-top">
-                <img src={bids4} alt="" />
-              <Link to={`/post/123`}>
-              <p className="bids-title">Abstract Patern</p>
-              </Link>
-              </div>
-              <div className="bids-card-bottom">
-                <p>0.87 <span>ETH</span></p>
-                <p> <AiFillHeart /> 82</p>
-              </div>
-            </div>
-          </div>
-          <div className="card-column" >
-            <div className="bids-card">
-              <div className="bids-card-top">
-                <img src={bids5} alt="" />
-              <Link to={`/post/123`}>
-              <p className="bids-title">White Line Grafiti</p>
-              </Link>
-              </div>
-              <div className="bids-card-bottom">
-                <p>0.09 <span>ETH</span></p>
-                <p> <AiFillHeart /> 22</p>
-              </div>
-            </div>
-          </div>
-          <div className="card-column" >
-            <div className="bids-card">
-              <div className="bids-card-top">
-                <img src={bids6} alt="" />
-              <Link to={`/post/123`}>
-              <p className="bids-title">Abstract Triangle</p>
-              </Link>
-              </div>
-              <div className="bids-card-bottom">
-                <p>0.90 <span>ETH</span></p>
-                <p> <AiFillHeart /> 71</p>
-              </div>
-            </div>
-          </div>
-          <div className="card-column" >
-            <div className="bids-card">
-              <div className="bids-card-top">
-                <img src={bids7} alt="" />
-              <Link to={`/post/123`}>
-              <p className="bids-title">Lake Landscape</p>
-              </Link>
-              </div>
-              <div className="bids-card-bottom">
-                <p>0.52 <span>ETH</span></p>
-                <p> <AiFillHeart /> 63</p>
-              </div>
-            </div>
-          </div>
-          <div className="card-column" >
-            <div className="bids-card">
-              <div className="bids-card-top">
-                <img src={bids8} alt="" />
-              <Link to={`/post/123`}>
-              <p className="bids-title">Blue Red Art</p>
-              </Link>
-              </div>
-              <div className="bids-card-bottom">
-                <p>0.85 <span>ETH</span></p>
-                <p> <AiFillHeart /> 66</p>
-              </div>
-            </div>
-          </div>
+          {nftToDisplay}
         </div>
       </div>
-      <div className="load-more">
-        <button>Load More</button>
-      </div>
+      {more ?
+      (<>
+        <div className="load-more">
+          <button>Load More</button>
+        </div>
+      </>):(
+        <></>
+      )
+    }
+      
     </div>
   )
 }

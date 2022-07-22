@@ -5,13 +5,21 @@ import { FaGalacticRepublic } from 'react-icons/fa';
 import logo from '../../assets/logo.png'
 import {  Link } from "react-router-dom";
 import { ethers } from "ethers";
+import { contractAdress, nameOfCurrentProject, chainId, chaineName, enableMint} from '../../contract/global';
 
 
 const Menu = () => (
   <>
-     <Link to="/"><p>Explore</p> </Link>
-     <Link to="/"><p>My NFTs</p></Link>
-    
+     <Link to="/explore"><p>Explore</p> </Link>
+     <Link to="/mynft"><p>My NFTs</p></Link>
+
+     {enableMint  ?
+      (     
+        <>  
+          <Link to="/mint"><p>Mint</p></Link>
+        </>  
+        
+      ):(<> </> )}    
   </>
  )
 
@@ -31,7 +39,6 @@ const Menu = () => (
   // request event for metamask
   const bntConnectWallet = () => {   
     // Asking if metamask is already present or not
-
     
     if (window.ethereum) {
       // res[0] for fetching a first wallet
@@ -39,13 +46,13 @@ const Menu = () => (
         .request({ method: "eth_requestAccounts" })
         .then(async (res) =>{ 
 
-          let chainId = await window.ethereum.request({ method: 'eth_chainId'})
+          let chainIdWallet = await window.ethereum.request({ method: 'eth_chainId'})
           console.log('Connected to chain:' + chainId)
 
-          const rinkebyChainId = '0x4'
+      
 
-          if (chainId !== rinkebyChainId) {
-            alert('You are not connected to the Rinkeby Testnet!')
+          if (chainIdWallet !== chainId) {
+            alert('You are not connected to the '+chaineName)
             return
           }
 
@@ -61,7 +68,15 @@ const Menu = () => (
   const getbalance = async (address) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const balance = await provider.getBalance(address);
-    const balanceInEth = ethers.utils.formatEther(balance);
+   
+    let balanceInEth = ethers.utils.formatEther(balance);
+    console.log(balanceInEth);
+
+    const address2 = contractAdress;
+    const balanceBigNumber = await provider.getBalance(address2);
+    balanceInEth = ethers.utils.formatEther(balanceBigNumber);
+    console.log(balanceInEth);
+
   
   };
   
@@ -74,7 +89,7 @@ const Menu = () => (
       address: account,
       addressMin: account.substr(0,6)+"...."+account.substr(account.length-4)
     });
- 
+
     // Setting a balance
     getbalance(account);
   };
@@ -85,11 +100,11 @@ const Menu = () => (
         <div className="navbar-links_logo">
           <img src={logo} alt="logo" />
           <Link to="/"> 
-            <h1>NFT Minter</h1>
+            <h1>{ nameOfCurrentProject}</h1>
           </Link>
         </div>
         <div className="navbar-links_container">
-          <input type="text" placeholder='Search Item Here' autoFocus={true} />
+          {/*<input type="text" placeholder='Search Item Here' autoFocus={true} /> */}
          <Menu />               
         </div>
       </div>
