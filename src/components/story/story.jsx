@@ -12,7 +12,7 @@ const Story = () => {
     dataToDisplay.push( <div className="card" key={i}>
     <div className="info">
       <h3 className="title">{ story[i].title }</h3>
-      <p>{ story[i].content }</p>
+      <p className='txt'><span className='txt'>{ story[i].content }</span></p>
     </div>
   </div>);
   }

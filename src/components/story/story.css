@@ -108,6 +108,11 @@
   position: relative;
 }
 
+.txt{
+  color: var(--color-txt-inside-story);
+  position: relative;
+}
+
 /* Timeline dot  */
 .title::before {
   content: "";
