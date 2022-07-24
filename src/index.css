@@ -12,6 +12,20 @@
   --color-bg: #24252d;
   --color-card : #2A2D3A;
   --color-footer : #24252D;
+  --color-tile: #2A2D3A;
+  --color-text: #FFFFFF;
+  --color-title-story: #FFFFFF;
+  --color-bg-story: #24252d;
+  --color-line-story: #EB1484;
+  --color-title-inside-story: #EB1484;
+  --color-bg-card-story: #333;
+  --color-txt-card-story: gray;
+  --color-main-title: #EB1484;
+  --color-main-txt: #gray;
+  --color-main-bg: #2A2D3A;
+  --color-nft-rent:  #e4771d; 
+  --color-nft-buy:  #14880a; 
+
 }
 /* ===== Scrollbar CSS ===== */
   /* Firefox */

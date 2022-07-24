@@ -17,22 +17,24 @@
 }
 .bids-container-card{
   margin: 0 -5px;
+  
 }
 .bids-container-card:after {
   content: "";
   display: table;
   clear: both;
+  
 }
 .card-column{
   float: left;
   width: 20%;
 }
 .bids-card{
-  background: #2A2D3A;
   border-radius: 20px;
   padding: 11px 12px 19px 11px;
   margin-inline: 10px;
   margin-bottom: 20px;
+  
 }
 .bids-card img{
   border-radius: 20px;
@@ -45,11 +47,32 @@
   line-height: 21px;
   color: #FFFFFF;
   margin-top: 15px;
+  
+  
 }
 .bids-card-bottom{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between;  
 }
+
+.bids-card-bottom-unavailable{
+  display: flex;
+  justify-content: space-between;  
+  background: #FFFFFF;
+}
+
+.bids-card-bottom-available-rent{
+  display: flex;
+  justify-content: space-between;  
+  background: var(--color-nft-rent);
+}
+
+.bids-card-bottom-available-mint{
+  display: flex;
+  justify-content: space-between;  
+  background: var(--color-nft-buy);
+}
+
 .bids-card-bottom p{
   font-family: var(--font-family);
 font-weight: 600;
@@ -82,6 +105,18 @@ font-weight: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
+}
+
+.legend-rent{
+  color: var(--color-nft-rent);
+
+}
+
+.legend-mint{
+  color: var(--color-nft-buy);
+}
+.legend-available{
+  
 }
 
 @media screen and (max-width: 1440px) {

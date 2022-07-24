@@ -9,9 +9,9 @@ const Story = () => {
   const dataToDisplay=[];
 
   for (var i = 0; i < story.length; i++) {
-    dataToDisplay.push( <div class="card" key={i}>
-    <div class="info">
-      <h3 class="title">{ story[i].title }</h3>
+    dataToDisplay.push( <div className="card" key={i}>
+    <div className="info">
+      <h3 className="title">{ story[i].title }</h3>
       <p>{ story[i].content }</p>
     </div>
   </div>);
@@ -19,11 +19,11 @@ const Story = () => {
 
   return (
     <div>
-      <div class="title-story">
+      <div className="title-story">
       Our Story
       </div>  
-      <div class="timeline">
-        <div class="outer">
+      <div className="timeline">
+        <div className="outer">
           {dataToDisplay} 
         </div>
       </div>

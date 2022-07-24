@@ -35,6 +35,10 @@ const Menu = () => (
   const [toggleMenu,setToggleMenu] = useState(false)
 
 
+  async function isConnected() {   
+  }
+
+
   // Button handler button for handling a
   // request event for metamask
   const bntConnectWallet = () => {   
@@ -47,7 +51,6 @@ const Menu = () => (
         .then(async (res) =>{ 
 
           let chainIdWallet = await window.ethereum.request({ method: 'eth_chainId'})
-          console.log('Connected to chain:' + chainId)
 
       
 
@@ -70,13 +73,10 @@ const Menu = () => (
     const balance = await provider.getBalance(address);
    
     let balanceInEth = ethers.utils.formatEther(balance);
-    console.log(balanceInEth);
 
     const address2 = contractAdress;
     const balanceBigNumber = await provider.getBalance(address2);
     balanceInEth = ethers.utils.formatEther(balanceBigNumber);
-    console.log(balanceInEth);
-
   
   };
   

@@ -3,14 +3,14 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract NftTest is ERC721Enumerable, Ownable {
+contract NftTestERC721 is ERC721Enumerable, Ownable {
   using Strings for uint256;
 
   string public baseURI;
   string public baseExtension = ".json";
   uint256 public cost = 0.01 ether;
-  uint256 public maxSupply = 10;
-  uint256 public maxMintAmount = 1;
+  uint256 public maxSupply = 100;
+  uint256 public maxMintAmount = 2;
   bool public paused = false;
   mapping(address => bool) public whitelisted;
 
@@ -60,6 +60,19 @@ contract NftTest is ERC721Enumerable, Ownable {
     uint256[] memory tokenIds = new uint256[](ownerTokenCount);
     for (uint256 i; i < ownerTokenCount; i++) {
       tokenIds[i] = tokenOfOwnerByIndex(_owner, i);
+    }
+    return tokenIds;
+  }
+
+  function getNumberMint()
+    public
+    view
+    returns (uint[] memory)
+  {
+    uint256 ownerTokenCount = balanceOf(owner());
+    uint256[] memory tokenIds = new uint256[](ownerTokenCount);
+    for (uint256 i; i < ownerTokenCount; i++) {
+      tokenIds[i] = tokenOfOwnerByIndex(owner(), i);
     }
     return tokenIds;
   }

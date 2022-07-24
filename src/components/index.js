@@ -4,3 +4,4 @@ export {default as Bids} from './bids/Bids';
 export {default as Footer} from './footer/Footer';
 export {default as Story} from './story/story';
 export {default as Main} from './main/main';
+export {default as loader} from './loader/loader';

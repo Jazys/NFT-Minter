@@ -1,10 +1,10 @@
 
 .title-story {
-  color: #FFFFFF;
+  color: var(--color-title-story);
   margin: 0;
   padding: 0;
-  --primary-color: #24252d;
-  --background-color: #24252d;
+  --primary-color: var(--color-bg-story);
+  --background-color: var(--color-bg-story);
   --font: sans-serif;
   display: flex;
   flex-direction: column;
@@ -22,8 +22,8 @@
 .timeline {
   margin: 0;
   padding: 0;
-  --primary-color: #24252d;
-  --background-color: #24252d;
+  --primary-color: var(--color-bg-story);
+  --background-color:var(--color-bg-story);
   --font: sans-serif;
   display: flex;
   flex-direction: column;
@@ -53,7 +53,7 @@
   content: "";
   position: absolute;
   width: 50%;
-  border: solid #EB1484;
+  border: solid var(--color-line-story);
 }
 
 /* Setting the border of top, bottom, left */
@@ -96,15 +96,15 @@
 .info {
   display: flex;
   flex-direction: column;
-  background: #333;
-  color: gray;
+  background: var(--color-bg-card-story);
+  color:var(--color-txt-card-story);
   border-radius: 10px;
   padding: 10px;
 }
 
 /* Title of the card */
 .title {
-  color: #EB1484;
+  color: var(--color-title-inside-story);
   position: relative;
 }
 
@@ -116,7 +116,7 @@
   height: 10px;
   background: white;
   border-radius: 999px;
-  border: 3px solid #EB1484;
+  border: 3px solid var(--color-title-inside-story);
 }
 
 /* text right if the card is even  */

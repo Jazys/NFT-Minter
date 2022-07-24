@@ -3,8 +3,8 @@
   color: #FFFFFF;
   margin: 0;
   padding: 0;
-  --primary-color: #2A2D3A;
-  --background-color: #2A2D3A;
+  --primary-color: var(--color-main-bg);
+  --background-color: var(--color-main-bg);
   --font: sans-serif;
   display: flex;
   flex-direction: column;
@@ -17,12 +17,12 @@
   font-weight: 600;
   font-size: 38px;
   line-height: 42px;
-  color: #EB1484;
+  color: var(--color-main-title);
   width: 100%;
 }
 
 .main-card{
-  background: #2A2D3A;
+  background: var(--color-main-bg);
   border-radius: 20px;
   padding: 11px 12px 19px 11px;
   margin-inline: 10px;
@@ -33,7 +33,7 @@
 }
 
 .main-card-text{
-  color: #FFFFFF;
+  color: var(--color-main-txt);
   width: 100%;
   font-size: 20px;
 }

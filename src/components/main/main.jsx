@@ -12,22 +12,22 @@ const Main = () => {
 
     if(main[i].position===1){
       dataToDisplay.push(
-          <div class="row main-card" key={i}>
-            <div class="column-left">
+          <div className="row main-card" key={i}>
+            <div className="column-left">
             <img src={main[i].img} alt=""/>
             </div>
             <div>
-            <h2 class="title-main">{main[i].title}</h2>  
-            <p class="main-card-text">{main[i].content}</p>
+            <h2 className="title-main">{main[i].title}</h2>  
+            <p className="main-card-text">{main[i].content}</p>
             </div>
           </div>
       );
     }else{
       dataToDisplay.push(
-          <div class="row main-card" key={i}>
-            <div class="column-right">
-            <h2 class="title-main">{main[i].title}</h2>  
-            <p class="main-card-text">{main[i].content}</p>
+          <div className="row main-card" key={i}>
+            <div className="column-right">
+            <h2 className="title-main">{main[i].title}</h2>  
+            <p className="main-card-text">{main[i].content}</p>
             </div>
             <div>
             <img src={main[i].img} alt="" />
