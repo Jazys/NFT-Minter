@@ -32,38 +32,41 @@ const MyNft = () => {
 
       if(contractType === CONTRACT_TYPE.ERC721){
 
-        for(let i = 0; i < nbNft; i++) {
-          const tokenId = await contract.tokenOfOwnerByIndex(accounts[0], i);
+        for(let i = 0; i < nbNft; i++) {  
+          try{
 
-          let tokenMetadataURI = await contract.tokenURI(tokenId);
+            const tokenId = await contract.tokenOfOwnerByIndex(accounts[0], i);
 
-          if(jsonCID === "")
-            tokenMetadataURI=prefixNftStoreIpfs+jsonCID+"/"+tokenId+".json";
-          else
-            tokenMetadataURI=prefixNftStoreIpfs+tokenId+".json";
+            let tokenMetadataURI = await contract.tokenURI(tokenId);
+  
+            if(jsonCID === "")
+              tokenMetadataURI=prefixNftStoreIpfs+jsonCID+"/"+tokenId+".json";
+            else
+              tokenMetadataURI=prefixNftStoreIpfs+tokenId+".json";
+  
+              let imgSrc="";
 
-            try{
-                let response= await axios.get(tokenMetadataURI);  
-                let imgSrc=prefixNftStoreIpfs+response.data.image.split("ipfs://")[1];
+              let response= await axios.get(tokenMetadataURI);  
+              imgSrc=prefixNftStoreIpfs+response.data.image.split("ipfs://")[1];
 
-                setMynft(oldArray => [...oldArray, <div className="card-column" key={i}>
-                <div className="bids-card">
-                  <div className="bids-card-top">
-                    <img src={imgSrc} alt="" />
-                  <Link to={{pathname:`/nft/${tokenId}`, state:''}}>
-                  <p className="bids-title">{response.data.name}</p>
-                  </Link>
-                  </div>
-                  <div className="bids-card-bottom">
-                    <p>{response.data.description}</p>
-                    <p>Edition : {response.data.edition}</p>
-                  </div>
+              setMynft(oldArray => [...oldArray, <div className="card-column" key={i}>
+              <div className="bids-card">
+                <div className="bids-card-top">
+                  <img src={imgSrc} alt="" />
+                <Link to={{pathname:`/nft/${tokenId}`, state:''}}>
+                <p className="bids-title">{response.data.name}</p>
+                </Link>
                 </div>
-              </div>]);
-            }
-            catch{
+                <div className="bids-card-bottom">
+                  <p>{response.data.description}</p>
+                  <p>Edition : {response.data.edition}</p>
+                </div>
+              </div>
+            </div>]);
+          }
+          catch{
 
-            }
+          }
           }
       }else if(contractType === CONTRACT_TYPE.EIP4907){        
 
