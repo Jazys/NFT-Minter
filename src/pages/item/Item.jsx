@@ -9,7 +9,8 @@ import { contractAdress, prefixNftStoreIpfs, allNft, jsonCID, prefixLinkTransact
 import { useEffect, useState } from 'react';
 import   Loader   from '../../components/loader/loader';
 import { useLocation } from 'react-router';
-//import QRImage from "react-qr-image";
+import ReactDOM from 'react-dom';
+import {QRCodeCanvas} from 'qrcode.react';
 
 const Item = (props) => {
 
@@ -41,7 +42,7 @@ const Item = (props) => {
 
   function handleClickSetQrcode(e) {
     e.preventDefault(); 
-    getCryptMsgAndQrCode();
+    getCryptMsgAndQrCode();   
   }  
 
   function handleInput(e) {
@@ -75,12 +76,24 @@ const Item = (props) => {
       const contract = new ethers.Contract(contractAdress, abi, signer);
       const msgHash = await contract.getMessageHash("0x14723A09ACff6D2A60DcdF7aA4AFf308FDDC160C",1,"test",1); 
       const signerWithMsgHash =await window.ethereum.request({ method: "personal_sign", params: [accounts[0], msgHash]});
-      console.log(signerWithMsgHash);
-      const b64SIgner = window.btoa('signerWithMsgHash');
-      console.log(b64SIgner);
+      //console.log(signerWithMsgHash);
+      const b64SIgner = window.btoa(signerWithMsgHash+";;"+ Date.now());
+      //console.log(b64SIgner);
 
-      const verify= await contract.verify("0x3534916fB6831b6C6d2e843974d1D4351eb63ce8","0x04723A09ACff6D2A60DcdF7aA4AFf308FDDC160C",1,"test",1, signerWithMsgHash) ; 
-      console.log(verify);
+      ReactDOM.render(
+        <div>
+          <QRCodeCanvas value={b64SIgner}></QRCodeCanvas>        
+        </div>
+        ,
+        document.getElementById('displayQrCode')
+      );
+
+      //to decode
+      //const b64SIgnerAfter = window.atob(b64SIgner);
+      //console.log(b64SIgnerAfter);
+
+      //const verify= await contract.verify("0x3534916fB6831b6C6d2e843974d1D4351eb63ce8","0x14723A09ACff6D2A60DcdF7aA4AFf308FDDC160C",1,"test",1, signerWithMsgHash) ; 
+      //console.log(verify);
       //0x0ea4313e4157169b844fc597103c5efd8a662c6b8e4761c1567f6549c7d8449221fda468d09687ea8361c99f614bb740fb0b4e2c32d077fba0607f5c8aef0c581c
 
       //<QRImage text="hello" />
@@ -205,7 +218,7 @@ const Item = (props) => {
                     <input id="walletAdr" type="text" placeholder='Wallet Addr'  onInput={handleInput} />
                     <button className="primary-btn" onClick={handleClick}>Transfer</button>    
                     <button className="secondary-btn">Metadata</button>
-                    <button className="primary-btn">Create QrCode</button>
+                    <button className="primary-btn">Create QrCode</button>          
                   </>):
                   (<>
                     <button className="primary-btn" onClick={handleMintUnique}> Mint {allNft[tokenId-1].price} {allNft[tokenId-1].token}</button>
@@ -314,6 +327,7 @@ const Item = (props) => {
     <div>        
         {nft}
         <div className='item-loader'>
+          
           { isTransfer === true ?
             (<><Loader msg="Transfer is in progress"></Loader> </>):
           (<></>)
@@ -322,7 +336,8 @@ const Item = (props) => {
             (<><Loader msg="Buy NFT is in progress"></Loader> </>):
           (<></>)
           }
-        </div>
+          <div id="displayQrCode"> </div>
+        </div>      
     </div>
       
   )

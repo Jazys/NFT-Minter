@@ -38,11 +38,15 @@ const MyNft = () => {
             const tokenId = await contract.tokenOfOwnerByIndex(accounts[0], i);
 
             let tokenMetadataURI = await contract.tokenURI(tokenId);
+
+            console.log(tokenMetadataURI);
   
             if(jsonCID === "")
               tokenMetadataURI=prefixNftStoreIpfs+jsonCID+"/"+tokenId+".json";
             else
-              tokenMetadataURI=prefixNftStoreIpfs+tokenId+".json";
+              tokenMetadataURI=prefixNftStoreIpfs+tokenMetadataURI.replace("ipfs://",'');
+
+              console.log(tokenMetadataURI);
   
               let imgSrc="";
 
