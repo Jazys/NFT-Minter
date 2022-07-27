@@ -6,28 +6,13 @@ import React, { useState, useEffect  } from "react";
 import { ethers } from "ethers";
 import abiContract from './contract/abi.json';
 import { contractAdress, enableMint} from './contract/global';
-import useBus from 'use-bus';
-import { dispatch } from 'use-bus';
 
-//simpli example
+//simply example
 //https://github.com/cryptoadam0x28/wallet-nfts
 
 function App() {
 
   const abi= JSON.parse(JSON.stringify(abiContract));
-
-  const IterateBtn = () => {
-    return (
-      <button onClick={() => dispatch('@@ui/ADD_ITERATION', '')}>
-        Iterate
-      </button>
-    )
-  }
-  useBus(
-    '@@ui/ADD_ITERATION',
-    () => {},
-  )
-
   
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import logo from '../../assets/logo.png'
 import {  Link } from "react-router-dom";
 import { ethers } from "ethers";
 import { contractAdress, nameOfCurrentProject, chainId, chaineName, enableMint} from '../../contract/global';
+import { dispatch } from 'use-bus';
 
 
 const Menu = () => (
@@ -52,14 +53,24 @@ const Menu = () => (
 
           let chainIdWallet = await window.ethereum.request({ method: 'eth_chainId'})
 
-      
-
-          if (chainIdWallet !== chainId) {
-            alert('You are not connected to the '+chaineName)
-            return
+          if (parseInt(chainIdWallet.toLowerCase() , 16) !== parseInt(chainId.toLowerCase(), 16)) {
+            try {
+              await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: chainId }], // chainId must be in hexadecimal numbers
+              });
+             
+            }catch(error){
+              alert('Unable to connect');
+              return
+            }
+            
           }
 
-         accountChangeHandler(res[0])
+         accountChangeHandler(res[0]);
+
+         dispatch('@@ui/RELOAD_COLLECTION', '');
+
       });
     } else {
       alert("install metamask extension!!");

@@ -7,11 +7,19 @@ import React, { useState, useEffect  } from "react";
 import { ethers } from "ethers";
 import abiContract from '../../contract/abi.json';
 import { contractAdress, walletAdrEnableToAccordingRent} from '../../contract/global';
+import useBus from 'use-bus';
+import { dispatch } from 'use-bus';
 
 const Bids = ({title, more}) => {
 
   const abi= JSON.parse(JSON.stringify(abiContract));
   const [nftToDisplay,setNftToDisplay] = useState([]); 
+
+
+  useBus(
+    '@@ui/RELOAD_COLLECTION',
+    () => { getNumberTakenNft(); },
+  )
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
