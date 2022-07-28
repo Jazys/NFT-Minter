@@ -3,8 +3,6 @@ import './login.css'
 import {Link} from 'react-router-dom'
 const Login = (props) => {
 
-  console.log(props);
-
 
   return (
     <div className='login section__padding'>

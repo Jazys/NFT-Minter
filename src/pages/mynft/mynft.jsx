@@ -38,35 +38,31 @@ const MyNft = () => {
             const tokenId = await contract.tokenOfOwnerByIndex(accounts[0], i);
 
             let tokenMetadataURI = await contract.tokenURI(tokenId);
-
-            console.log(tokenMetadataURI);
-  
+       
             if(jsonCID === "")
               tokenMetadataURI=prefixNftStoreIpfs+jsonCID+"/"+tokenId+".json";
             else
               tokenMetadataURI=prefixNftStoreIpfs+tokenMetadataURI.replace("ipfs://",'');
-
-              console.log(tokenMetadataURI);
   
-              let imgSrc="";
+            let imgSrc="";
 
-              let response= await axios.get(tokenMetadataURI);  
-              imgSrc=prefixNftStoreIpfs+response.data.image.split("ipfs://")[1];
+            let response= await axios.get(tokenMetadataURI);  
+            imgSrc=prefixNftStoreIpfs+response.data.image.split("ipfs://")[1];
 
-              setMynft(oldArray => [...oldArray, <div className="card-column" key={i}>
-              <div className="bids-card">
-                <div className="bids-card-top">
-                  <img src={imgSrc} alt="" />
-                <Link to={{pathname:`/nft/${tokenId}`, state:''}}>
-                <p className="bids-title">{response.data.name}</p>
-                </Link>
-                </div>
-                <div className="bids-card-bottom">
-                  <p>{response.data.description}</p>
-                  <p>Edition : {response.data.edition}</p>
-                </div>
+            setMynft(oldArray => [...oldArray, <div className="card-column" key={i}>
+            <div className="bids-card">
+              <div className="bids-card-top">
+                <img src={imgSrc} alt="" />
+              <Link to={{pathname:`/nft/${tokenId}`, state:''}}>
+              <p className="bids-title">{response.data.name}</p>
+              </Link>
               </div>
-            </div>]);
+              <div className="bids-card-bottom">
+                <p>{response.data.description}</p>
+                <p>Edition : {response.data.edition}</p>
+              </div>
+            </div>
+          </div>]);
           }
           catch{
 

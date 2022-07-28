@@ -34,7 +34,6 @@ const Mint = () => {
         const maxSupply = await contract.maxSupply();
         const object = {"cost": String(cost), "totalSupply": String(totalSupply), "maxSupply":String(maxSupply)};
         setMintNumber(String(totalSupply)+"/"+String(maxSupply));
-        console.log(object);
         //setData(object);
       }
       catch(err) {
